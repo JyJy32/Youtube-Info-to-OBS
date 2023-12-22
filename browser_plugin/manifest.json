@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "youtube video info to OBS",
+    "version": "0.1.0",
+    "description": "youtube video info to OBS",
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
