@@ -1,12 +1,19 @@
 {
     "manifest_version": 3,
     "name": "youtube video info to OBS",
-    "version": "0.1.0",
+    "version": "0.1.3",
     "description": "youtube video info to OBS",
+    "host_permissions": [
+        "http://localhost/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
     "content_scripts": [
         {
             "matches": ["https://www.youtube.com/*"],
-            "js": ["content.js"]
+            "js": ["content.js"],
+            "run_at": "document_start"
         }
     ]
 }
