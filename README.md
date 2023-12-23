@@ -21,6 +21,6 @@ go build
 
 to get an executable
 
-then you can add a browser source to OBS with url http://localhost:6969/video
+then you can add a browser source to OBS with url http://localhost:6969/current_video
 
 This is a very beta build atm and needs a lot of pollish
