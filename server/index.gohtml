@@ -15,7 +15,10 @@ body {
     justify-content: center;
     height: 100vh;
 }
-
+    .container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+    }
     #image-container {
         grid-column: 1 / 2;
         margin-right: 20px;
@@ -31,14 +34,10 @@ body {
         height: auto;
     }
         </style>
+    
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     </head>
     <body>
-        <div id="image-container">
-            <img src="{{.Thumbnail}}" alt="Album Cover">
-        </div>
-        <div id="text-container">
-            <h1>{{.Title}}</h1>
-            <h2>{{.Channel}}</h2>
-        </div>
+        <div hx-get="/video" hx-trigger="every 1s" class="container"></div>
     </body>
 </html>
