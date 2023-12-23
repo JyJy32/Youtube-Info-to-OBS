@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GoHTML Example</title>
+        <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+    #image-container {
+        grid-column: 1 / 2;
+        margin-right: 20px;
+    }
+
+    #text-container {
+        grid-column: 2 / 3;
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+        </style>
+    </head>
+    <body>
+        <div id="image-container">
+            <img src="{{.Thumbnail}}" alt="Album Cover">
+        </div>
+        <div id="text-container">
+            <h1>{{.Title}}</h1>
+            <h2>{{.Channel}}</h2>
+        </div>
+    </body>
+</html>

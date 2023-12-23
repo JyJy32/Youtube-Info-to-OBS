@@ -12,11 +12,13 @@ import (
 )
 
 type VideoInfo struct {
-    videoId   string
-    title     string
-    channel   string
-    thumbnail string
+    VideoId   string
+    Title     string
+    Channel   string
+    Thumbnail string
 }
+
+var currentVideo VideoInfo;
 
 func main() {
     logger.Debug("Starting server")

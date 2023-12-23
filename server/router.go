@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"net/http"
 
 	"github.com/JyJy32/logger"
@@ -9,7 +10,9 @@ import (
 
 func server_init() {
     router := mux.NewRouter()
-    router.HandleFunc("/{videoID}", youtube_info_to_obs).Methods("POST")
+    router.HandleFunc("/video", get_videohtml).Methods("GET")
+    router.HandleFunc("/set_video/{videoID}", youtube_info_to_obs).Methods("POST")
+
 
     srv := &http.Server{
         Handler: router,
@@ -38,6 +41,26 @@ func youtube_info_to_obs(w http.ResponseWriter, r *http.Request) {
         video.Snippet.Thumbnails.Default.Url,
     }
 
-    logger.Debug("Video title: " + info.title)
+    logger.Debug("Video title: " + info.Title)
+
+    if currentVideo.VideoId != info.VideoId {
+        logger.Debug("Video changed")
+        currentVideo = info
+    }
 }
 
+func get_videohtml(w http.ResponseWriter, r *http.Request) { 
+   template, err := template.ParseFiles("index.gohtml")
+   if err != nil {
+       logger.Error("Error parsing template")
+       logger.Error(err.Error())
+       return
+   }
+   logger.Http("Serving video info")
+   err = template.Execute(w, currentVideo)
+   if err != nil {
+       logger.Error("Error executing template")
+       logger.Error(err.Error())
+       return
+   }
+}
