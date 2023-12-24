@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "youtube video info to OBS",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "youtube video info to OBS",
     "host_permissions": [
         "http://localhost/*"

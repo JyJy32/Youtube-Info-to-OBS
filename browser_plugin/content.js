@@ -1,4 +1,4 @@
-console.log("PLUGIN: yt info to obs 0.1.3");
+console.log("PLUGIN: yt info to obs 0.1.4");
 
 
 async function getVideoId() {
@@ -9,11 +9,11 @@ async function getVideoId() {
             if (ampersandPosition !== -1) {
                 videoId = videoId.substring(0, ampersandPosition);
             }
+            //post to localhost
+            chrome.runtime.sendMessage({videoId: videoId}, function(response) {
+                console.log(response);
+            });
         }
-        //post to localhost
-        chrome.runtime.sendMessage({videoId: videoId}, function(response) {
-            console.log(response);
-        });
         //wait 1 second
         await new Promise(r => setTimeout(r, 1000));
     }
