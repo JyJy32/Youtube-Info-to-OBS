@@ -60,7 +60,7 @@ func get_videohtml(w http.ResponseWriter, r *http.Request) {
 		logger.Error(err.Error())
 		return
 	}
-	logger.Http("Serving video info")
+	//logger.Http("Serving video info")
 	err = template.Execute(w, currentVideo)
 	if err != nil {
 		logger.Error("Error executing template")
