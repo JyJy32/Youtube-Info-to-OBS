@@ -26,7 +26,13 @@ func server_init() {
 
 func youtube_info_to_obs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	logger.Http("Received request")
+    if params["videoID"] == "" {
+        return 
+    }
+    if params["videoID"] == currentVideo.VideoId {
+        return
+    }
+    logger.Http("Received request")
 	logger.Debug("Video ID: " + params["videoID"])
 	video, err := get_video(params["videoID"])
 	if err != nil {
@@ -43,10 +49,8 @@ func youtube_info_to_obs(w http.ResponseWriter, r *http.Request) {
 
 	logger.Debug("Video title: " + info.Title)
 
-	if currentVideo.VideoId != info.VideoId {
-		logger.Debug("Video changed")
-		currentVideo = info
-	}
+    logger.Debug("video changed")
+    currentVideo = info
 }
 
 func get_videohtml(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +60,7 @@ func get_videohtml(w http.ResponseWriter, r *http.Request) {
 		logger.Error(err.Error())
 		return
 	}
-	logger.Http("Serving video info")
+	//logger.Http("Serving video info")
 	err = template.Execute(w, currentVideo)
 	if err != nil {
 		logger.Error("Error executing template")
