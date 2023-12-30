@@ -21,6 +21,8 @@ go build
 
 to get an executable
 
+you will also need an api key for the [youtube data api](https://developers.google.com/youtube/v3) and either put it as a env variable or use a .env file in the [server](/server) folder
+
 then you can add a browser source to OBS with url http://localhost:6969/current_video
 
 This is a very beta build atm and needs a lot of pollish
