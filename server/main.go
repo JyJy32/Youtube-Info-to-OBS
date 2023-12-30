@@ -18,7 +18,7 @@ type VideoInfo struct {
 	Thumbnail string
 }
 
-var currentVideo VideoInfo
+var CurrentVideoInfo VideoInfo
 
 func main() {
 	logger.Debug("Starting server")

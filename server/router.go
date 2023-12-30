@@ -10,7 +10,7 @@ import (
 
 func server_init() {
 	router := mux.NewRouter()
-	router.HandleFunc("/current_video", current_video).Methods("GET")
+	router.HandleFunc("/current_video", currentVideo).Methods("GET")
 	router.HandleFunc("/video", getVideo).Methods("GET")
 	router.HandleFunc("/set_video/{videoID}", youtube_info_to_obs).Methods("POST")
 
@@ -26,15 +26,16 @@ func server_init() {
 
 func youtube_info_to_obs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	if params["videoID"] == "" {
+	videoID, ok := params["videoID"]
+	if !ok || videoID == "undefined" || videoID == "" {
 		return
 	}
-	if params["videoID"] == currentVideo.VideoId {
+	if params["videoID"] == CurrentVideoInfo.VideoId {
 		return
 	}
 	logger.Http("Received request")
-	logger.Debug("Video ID: " + params["videoID"])
-	info, err := getVideoInfo(params["videoID"])
+	logger.Debug("Video ID: " + videoID)
+	info, err := getVideoInfo(videoID)
 	if err != nil {
 		logger.Error("Error getting video")
 		logger.Error(err.Error())
@@ -43,7 +44,7 @@ func youtube_info_to_obs(w http.ResponseWriter, r *http.Request) {
 	logger.Debug("Video title: " + info.Title)
 
 	logger.Debug("video changed")
-	currentVideo = *info
+	CurrentVideoInfo = *info
 }
 
 func getVideo(w http.ResponseWriter, r *http.Request) {
@@ -54,7 +55,7 @@ func getVideo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	//logger.Http("Serving video info")
-	err = template.Execute(w, currentVideo)
+	err = template.Execute(w, CurrentVideoInfo)
 	if err != nil {
 		logger.Error("Error executing template")
 		logger.Error(err.Error())
@@ -62,7 +63,7 @@ func getVideo(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func current_video(w http.ResponseWriter, r *http.Request) {
+func currentVideo(w http.ResponseWriter, r *http.Request) {
 	logger.Http("Serving current video")
 	templ, err := template.ParseFiles("index.gohtml")
 	if err != nil {
