@@ -29,12 +29,39 @@ jobs:
     - name: Build for Windows
       working-directory: server
       run: GOOS=windows GOARCH=amd64 go build -o yt-info-to-obs.exe
-
-    - name: Archive Artifacts
-      uses: actions/upload-artifact@v2
+          
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
       with:
-        name: artifacts
-        path: |
-          server/yt-info-to-obs
-          server/yt-info-to-obs.exe
-    
+        go-version: '1.21.3'
+        check-latest: true
+
+    - name: example env file
+      run: echo API_KEY=<your api key here> > server/.env
+
+    - name: compress
+      run: | 
+        mkdir linux  
+        mkidr windows 
+        cp server/yt-info-to-obs linux  
+        cp server/.env linux 
+        cp server/yt-info-to-obs.exe windows 
+        cp server/.env windows
+        tar -czf yt-info-OBS-linux.tar.gz linux
+        zip -r yt-info-OBS-windows.zip windows
+        
+    - name: Install GitHub Release Action
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          yt-info-OBS-linux.tar.gz
+          yt-info-OBS-windows.zip
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref }}
+
+    - name: Publish Release
+      run: echo "Release published"
