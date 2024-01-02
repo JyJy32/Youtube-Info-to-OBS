@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "youtube video info to OBS",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "youtube video info to OBS",
     "host_permissions": [
         "http://localhost/*"
@@ -15,5 +15,10 @@
             "js": ["content.js"],
             "run_at": "document_start"
         }
-    ]
+    ],
+    "action": {
+        "default_title": "youtube video info to OBS",
+        "default_popup": "popup.html"
+    }
 }
+

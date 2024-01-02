@@ -13,6 +13,13 @@ func server_init() {
 	router.HandleFunc("/current_video", currentVideo).Methods("GET")
 	router.HandleFunc("/video", getVideo).Methods("GET")
 	router.HandleFunc("/set_video/{videoID}", youtube_info_to_obs).Methods("POST")
+    router.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+        w.WriteHeader(http.StatusOK)
+        w.Write([]byte("OK"))
+    }).Methods("GET")
+    router.HandleFunc("/coffee", func(w http.ResponseWriter, r *http.Request) {
+        w.WriteHeader(http.StatusTeapot)
+    }).Methods("GET")
 
 	srv := &http.Server{
 		Handler: router,
