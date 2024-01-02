@@ -55,7 +55,7 @@ func youtube_info_to_obs(w http.ResponseWriter, r *http.Request) {
 }
 
 func getVideo(w http.ResponseWriter, r *http.Request) {
-	template, err := template.ParseFiles("video.gohtml")
+	template, err := template.New("video").Parse(video)
 	if err != nil {
 		logger.Error("Error parsing template")
 		logger.Error(err.Error())
@@ -72,7 +72,7 @@ func getVideo(w http.ResponseWriter, r *http.Request) {
 
 func currentVideo(w http.ResponseWriter, r *http.Request) {
 	logger.Http("Serving current video")
-	templ, err := template.ParseFiles("index.gohtml")
+	templ, err := template.New("index").Parse(index)
 	if err != nil {
 		logger.Error("Error parsing template")
 		logger.Error(err.Error())
