@@ -42,7 +42,7 @@ jobs:
     - name: compress
       run: | 
         mkdir linux  
-        mkidr windows 
+        mkdir windows 
         cp server/yt-info-to-obs linux  
         cp server/.env linux 
         cp server/yt-info-to-obs.exe windows 
