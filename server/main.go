@@ -21,6 +21,7 @@ type VideoInfo struct {
 var CurrentVideoInfo VideoInfo
 
 func main() {
+	logger.Init()
 	logger.Debug("Starting server")
 	loadenv()
 	if os.Getenv("API_KEY") == "" {
