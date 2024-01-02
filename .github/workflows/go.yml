@@ -41,7 +41,7 @@ jobs:
         check-latest: true
 
     - name: example env file
-      run: echo API_KEY=<your api key here> > server/.env
+      run: echo "API_KEY=<your api key here>" > server/.env
 
     - name: compress
       run: | 
