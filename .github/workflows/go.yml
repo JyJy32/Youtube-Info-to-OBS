@@ -1,4 +1,4 @@
-# This workflow will build a golang project
+ho# This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
 name: Go
@@ -35,9 +35,14 @@ jobs:
     needs: build
     steps:
     - name: test
-      run: ls
+      run: |
+        pwd
+        ls
+      
     - name: example env file
-      run: touch server/.env && echo "API_KEY=<your api key here>" > server/.env
+      run: |
+        touch server/.env 
+        echo "API_KEY=<your api key here>" > server/.env
 
     - name: compress
       run: | 
