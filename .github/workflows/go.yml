@@ -35,6 +35,6 @@ jobs:
       with:
         name: artifacts
         path: |
-          yt-info-to-obs
-          yt-info-to-obs.exe
+          server/yt-info-to-obs
+          server/yt-info-to-obs.exe
     
