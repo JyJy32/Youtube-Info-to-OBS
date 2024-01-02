@@ -35,10 +35,10 @@ jobs:
         touch server/.env 
         echo "API_KEY=<your api key here>" > server/.env
           
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+#  release:
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
     - name: compress
       run: | 
         mkdir linux  
