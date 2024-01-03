@@ -73,7 +73,7 @@ jobs:
         files: |
           yt-info-OBS-linux.tar.gz
           yt-info-OBS-windows.zip
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.RELEASE_TOKEN }}
         tag_name: 0.0.1
 
     - name: Publish Release
